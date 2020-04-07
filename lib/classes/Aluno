@@ -1,0 +1,17 @@
+class Aluno{
+    final String nome;
+    final int idade;
+    final String cpf;
+    final String login;
+    final String senha;
+
+    Aluno(
+        this.nome,
+        this.idade,
+        this.cpf,
+        this.login,
+        this.senha,
+    );
+
+
+}
