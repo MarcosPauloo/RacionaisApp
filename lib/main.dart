@@ -26,11 +26,11 @@ class _MyAppState extends State<MyApp> {
           centerTitle: true,
           backgroundColor: Colors.green,
         ),
-        body: _body(context),
+        body: _bodyMain(context),
       );
   }
 
-   _body(context) {
+   _bodyMain(context) {
     return Container(
 
       decoration: new BoxDecoration(

@@ -1,5 +1,9 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:projeto_racionais/widgets/button.dart';
+import 'package:projeto_racionais/pages/pageTest.dart';
+import 'package:projeto_racionais/classes/OnClickNavigator.dart';
 
 class Atividades extends StatelessWidget {
 
@@ -8,26 +12,38 @@ class Atividades extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Atividades"),
+        title: Text(
+          "Atividades",
+          style: TextStyle(
+            fontSize: 23,
+            ),
+          ),
         backgroundColor: Colors.green,
         centerTitle: true,
       ),
-      body: _body(),
+      body: _bodyActivity(context),
     );
   }
-  _body(){
-    Container(
-      color: Colors.white,
-      child: ListView(
+  _bodyActivity(context){
+      return 
+      ListView(
         children: <Widget>[
-          _img(),
+          Container(child: _text()),
+          Button("Page test", ()=>OnClickNavigator(context,PageTest()), Colors.green),
+            //_img(),
         ],
-      ),
-    );
+      );    
   }
-  _img() {
-    return Image.asset(
-        "assets/images/explicacao1.png",
-    );
+
+  
+
+  
+  _text() {
+    return Text(
+      "Acerta tudo em!!!",
+      style: TextStyle(
+        fontSize: 20,
+      ),
+      );
   }
 }
