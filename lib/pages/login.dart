@@ -2,61 +2,117 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:projeto_racionais/classes/Aluno';
+import 'package:projeto_racionais/classes/LoginApi.dart';
+import 'package:projeto_racionais/classes/OnClickNavigator.dart';
+import 'package:projeto_racionais/classes/usuario.dart';
 import 'package:projeto_racionais/pages/menu.dart';
+import 'package:projeto_racionais/widgets/appText.dart';
+import 'package:projeto_racionais/widgets/button.dart';
+
+
 class Login extends StatelessWidget {
-  final TextEditingController _controladorNome = TextEditingController();
-  final TextEditingController _controladorIdade = TextEditingController();
-  final TextEditingController _controladorCPF = TextEditingController();
+  final _formkey = GlobalKey<FormState>();
+
   final TextEditingController _controladorLogin = TextEditingController();
+
   final TextEditingController _controladorSenha = TextEditingController();
+
+  final _focusSenha = FocusNode();
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Login"),
-        backgroundColor: Colors.green,
-      ),
-      body: SingleChildScrollView(
+        appBar: AppBar(
+          title: Text("Login"),
+          backgroundColor: Colors.green,
+        ),
+        body: _bodyLogin(context));
+  }
+
+  _bodyLogin(BuildContext context) {
+    return Form(
+      key: _formkey,
+      child: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top:16.0),
-              child: TextField(
-                controller: _controladorLogin,
-                decoration: InputDecoration(
-                    labelText: 'Login'
-                ),
-                keyboardType: TextInputType.text,
-              ),
+            SizedBox(height: 10,),
+            AppText(
+              "Login",
+              "Digite o login",
+              _controladorLogin,
+              validator: _validateLogin,
+              textInputAction: TextInputAction.next,
+              nextFocus: _focusSenha,
             ),
-            Padding(
-              padding: const EdgeInsets.only(top:16.0),
-              child: TextField(
-                controller: _controladorSenha,
-                decoration: InputDecoration(
-                    labelText: 'Senha'
-                ),
-                keyboardType: TextInputType.text,
-              ),
+            SizedBox(
+              height: 20,
             ),
-            RaisedButton(
-              child: Text("Login"),
-              onPressed: () {
-                  _onClickNavigator(context, Menu());
-                //Navigator.pop((context)); -- volta para a tela anterior
-              },
-            )
+            AppText(
+              "Senha",
+              "Digite a senha",
+              _controladorSenha,
+              password: true,
+              validator: _validateSenha,
+              textInputAction: TextInputAction.next,
+              focusNode: _focusSenha,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            buildContainerButton(
+              context,
+            ),
           ],
         ),
-      )
+      ),
     );
   }
-  void _onClickNavigator(BuildContext context, Widget page) {
-     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return page;
-    }));
+
+
+  Container buildContainerButton(BuildContext context) {
+    return Container(
+        height: 40,
+        child: Button(
+          "Login",
+          Colors.green,
+          onPressed: () => _onClickNavigator(context, Menu()),
+        ));
+  }
+
+  _onClickNavigator(BuildContext context, Widget page) async{
+    if (!_formkey.currentState.validate()) {
+      return;
+    }
+    
+    String login = _controladorLogin.text;
+    String senha = _controladorSenha.text;
+    print("Login: $login, Senha: $senha");
+    
+    //OnClickNavigator(context, page, replace: true);
+    Usuario user = await LoginApi.login(login, senha);
+
+    if(user!=null){
+      print(">>$user");
+      OnClickNavigator(context, page, replace: true);
+    }
+    else{
+      print("Login Incorreto");
+    }
+  }
+
+  String _validateLogin(String text) {
+    if (text.isEmpty) {
+      return "Digite o login";
+    }
+    return null;
+  }
+
+  String _validateSenha(String text) {
+    if (text.isEmpty) {
+      return "Digite a senha";
+    }
+    return null;
   }
 }

@@ -5,7 +5,7 @@ class Button extends StatelessWidget {
   Function onPressed;
   Color cor;
 
-  Button(this.text, this.onPressed,this.cor);
+  Button(this.text,this.cor,{this.onPressed});
 
   @override
   Widget build(BuildContext context) {

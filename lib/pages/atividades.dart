@@ -29,7 +29,6 @@ class Atividades extends StatelessWidget {
       ListView(
         children: <Widget>[
           Container(child: _text()),
-          Button("Page test", ()=>OnClickNavigator(context,PageTest()), Colors.green),
             //_img(),
         ],
       );    

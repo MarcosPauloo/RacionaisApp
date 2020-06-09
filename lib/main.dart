@@ -6,6 +6,8 @@ import 'package:projeto_racionais/classes/Aluno';
 import 'package:projeto_racionais/utils/nav.dart';
 import 'package:projeto_racionais/widgets/button.dart';
 
+import 'classes/OnClickNavigator.dart';
+
 void main() => runApp(MaterialApp(home: MyApp(), debugShowCheckedModeBanner: false));
 
 class MyApp extends StatefulWidget {
@@ -72,8 +74,8 @@ class _MyAppState extends State<MyApp> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              _button(context, "Login" ,  () => _onClickNavigator(context, Login())),
-              _button(context, "Cadastro", () => _onClickNavigator(context, Cadastro())),
+              _button(context, "Login" ,  () => OnClickNavigator(context, Login(), replace: true)),
+              _button(context, "Cadastro", () => OnClickNavigator(context, Cadastro())),
             ],
         ),
       ],
@@ -88,7 +90,7 @@ class _MyAppState extends State<MyApp> {
 
   _button(BuildContext context,String text, Function onPressed) {
     Color cor = Colors.green;
-    return Button(text,onPressed,cor);
+    return Button(text,cor, onPressed: onPressed,);
   }
 }
 
