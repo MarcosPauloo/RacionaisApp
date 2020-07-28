@@ -2,8 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:projeto_racionais/drawerlist.dart';
 import 'package:projeto_racionais/pages/atividades.dart';
+import 'package:projeto_racionais/pages/pagesAssuntos/pageFracao.dart';
+import 'package:projeto_racionais/pages/selecaoAssuntos.dart';
 import 'package:projeto_racionais/utils/nav.dart';
 import 'package:projeto_racionais/widgets/button.dart';
+import 'package:projeto_racionais/widgets/cardSelecao.dart';
 
 class Menu extends StatefulWidget {
   @override
@@ -11,7 +14,7 @@ class Menu extends StatefulWidget {
 }
 
 class _MenuState extends State<Menu> {
-  bool _gridView = true;
+  bool _listView = true;
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +28,11 @@ class _MenuState extends State<Menu> {
         backgroundColor: Colors.green,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.list),
+            icon: Icon(Icons.home),
             onPressed: () {
-              print("lista");
+              print("home");
               setState(() {
-                _gridView = false;
+                _listView = true;
               });
             },
           ),
@@ -38,7 +41,7 @@ class _MenuState extends State<Menu> {
             onPressed: () {
               print("grid");
               setState(() {
-                _gridView = true;
+                _listView = false;
               });
             },
           ),
@@ -46,30 +49,76 @@ class _MenuState extends State<Menu> {
       ),
       body: _bodyMenu(context),
       drawer: DrawerList(),
-      floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.edit),
-          onPressed: () => _onClickAbrirAtividades(context, Atividades()),
-          backgroundColor: Colors.green),
     );
   }
 
   _bodyMenu(context) {
-    if (_gridView) {
-      return ListView(
-        children: <Widget>[
-          Container(child: _text1()),
-          Container(child: _text2()),
-          Container(child: _img()),
-        ],
-      );
+    if (_listView) {
+      return listViewList();
     } else {
-      return ListView(
-        children: <Widget>[
-          Container(child: _text1()),
-          Container(child: _img()),
-        ],
-      );
+      return listViewGrid();
     }
+  }
+
+  ListView listViewList() {
+    return ListView(
+      children: <Widget>[
+        Container(child: _text1()),
+        Container(
+            child: Padding(
+          padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
+          child: _text2(),
+        )),
+        _img(),
+        Container(child: _text1List()),
+        Container(
+            child: Padding(
+          padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
+          child: _text2List(),
+        )),
+        /*RichText(
+          text: TextSpan(
+            text: 'Hello',
+            style: DefaultTextStyle.of(context).style,
+            children: <TextSpan>[
+              TextSpan(
+                  text: 'bold',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              TextSpan(text: 'world!'),
+            ],
+          ),
+        )*/
+      ],
+    );
+  }
+
+  listViewGrid() {
+    return Center(
+      child: _gridSelecao(context),
+    );
+  }
+  _gridSelecao(context) {
+    return GridView(
+      gridDelegate:
+          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+      padding: const EdgeInsets.all(20),
+       children: <Widget>[
+        CardSelecao("Fração","assets/images/ilustracaoFracao.png", PageFracao()),
+        CardSelecao("Números Inteiros", "assets/images/ilustracaoNumerosInteiros.png", Atividades()),
+        CardSelecao("Decimais finitos", "assets/images/divisaoFracao.png", Atividades()),
+        CardSelecao("Dízimas periódicas", "assets/images/ilustracaoDizimasPeriodicas.png", Atividades()),
+        CardSelecao("Assunto 5", "assets/images/divisaoFracao.png", Atividades()),
+        CardSelecao("Assunto 6", "assets/images/divisaoFracao.png", Atividades()),
+        CardSelecao("Assunto 7", "assets/images/divisaoFracao.png", Atividades()),
+        CardSelecao("Assunto 8", "assets/images/divisaoFracao.png", Atividades()),
+        CardSelecao("Assunto 9", "assets/images/divisaoFracao.png", Atividades()),
+      ], 
+    );
+  }
+
+  _textTest() {
+    return Material(); //https://api.flutter.dev/flutter/material/Material-class.html
+    //https://medium.com/collabcode/flutter-construindo-uma-linda-aplicação-de-notícias-parte-1-f0cbeecb7ab
   }
 
   _buttons(context) {
@@ -91,31 +140,106 @@ class _MenuState extends State<Menu> {
 
   _img() {
     return Image.asset(
-      "assets/images/explicacao1.png",
-      width: 100,
-      height: 100,
+      "assets/images/representacaoRacionais.png",
+      width: 300,
+      height: 200,
     );
-    //return Image.network("https://cdn.pixabay.com/photo/2012/05/07/15/07/penguin-48559_640.png", width: 100, height: 100);
+  }
+
+  _img2() {
+    return Image.asset(
+      "assets/images/divisaoFracao.png",
+      width: 500,
+      height: 150,
+    );
   }
 
   _text1() {
-    return Text(
-      "Como montamos uma fração?",
-      style: TextStyle(
-        fontSize: 23,
-        fontStyle: FontStyle.normal,
-        fontWeight: FontWeight.bold,
-        decorationColor: Colors.black,
+    return Center(
+      child: Text(
+        "O que são os numeros racionais?",
+        style: TextStyle(
+          fontSize: 23,
+          fontStyle: FontStyle.normal,
+          fontWeight: FontWeight.bold,
+          decorationColor: Colors.black,
+        ),
       ),
     );
   }
 
   _text2() {
-    return Text(
-      "É bem simples, ela é formada por dois números: o de baixo é o denominador (que é a quantidade que divide a parte inteira) e o de cima é o numerador (que é a parte que selecionamos)",
-      style: TextStyle(
-        fontSize: 18,
-        wordSpacing: 2,
+    return Padding(
+      padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+      child: Center(
+        child: Text(
+          "É um dos maiores grupos encontrados na matemática, envolvendo os numeros inteiros, naturais. De forma resumida, eles são todos os números que podem ser escrito em forma de fração. Eles podem estar representados por uma forma decimal finita ou infinita, e dízimas periódicas.",
+          style: TextStyle(
+            fontSize: 18,
+            wordSpacing: 2,
+          ),
+        ),
+      ),
+    );
+  }
+
+  _text1List() {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Text(
+        "Exemplos:",
+        style: TextStyle(
+          fontSize: 23,
+          fontStyle: FontStyle.normal,
+          fontWeight: FontWeight.bold,
+          decorationColor: Colors.black,
+        ),
+      ),
+    );
+  }
+
+  _text2List() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+      child: Center(
+        child: Text(
+          "0,3 = 3/10\n\n-7=-7/1\n\n0,12=12/100",
+          style: TextStyle(
+            fontSize: 18,
+            wordSpacing: 2,
+          ),
+        ),
+      ),
+    );
+  }
+
+  _card() {
+    return Center(
+      child: Card(
+        child: InkWell(
+          splashColor: Colors.blue.withAlpha(30),
+          onTap: () {
+            print("Card tapped");
+          },
+          child: Container(
+            child: Text("aaaaaaa"),
+            width: 300,
+            height: 100,
+          ),
+        ),
+      ),
+    );
+  }
+
+  _richText() {
+    return RichText(
+      text: TextSpan(
+        text: 'Hello',
+        style: DefaultTextStyle.of(context).style,
+        children: <TextSpan>[
+          TextSpan(text: 'bold', style: TextStyle(fontWeight: FontWeight.bold)),
+          TextSpan(text: 'world!'),
+        ],
       ),
     );
   }

@@ -92,6 +92,18 @@ class _MyAppState extends State<MyApp> {
     Color cor = Colors.green;
     return Button(text,cor, onPressed: onPressed,);
   }
+  bool _selection=false;
+  _popMenu(context){
+    return PopupMenuButton(
+      onSelected: (result) { setState(() {
+        _selection = result;
+      });},
+      itemBuilder: (BuildContext context2) => <PopupMenuEntry>[
+        const PopupMenuItem(
+          child: Text("Working a lot harder")),
+      ],
+    );
+  }
 }
 
 
