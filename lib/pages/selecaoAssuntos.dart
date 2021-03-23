@@ -4,6 +4,7 @@ import 'package:projeto_racionais/classes/OnClickNavigator.dart';
 import 'package:projeto_racionais/pages/atividades.dart';
 import 'package:projeto_racionais/pages/menu.dart';
 import 'package:projeto_racionais/pages/pagesAssuntos/pageFracao.dart';
+import 'package:projeto_racionais/pages/pagesAssuntos/pageSimplificacao.dart';
 import 'package:projeto_racionais/widgets/cardSelecao.dart';
 
 import 'login.dart';
@@ -51,15 +52,15 @@ class SelecaoAssuntos extends StatelessWidget {
           SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
       padding: const EdgeInsets.all(20),
        children: <Widget>[
-        CardSelecao("Fração","assets/images/ilustracaoFracao.png", PageFracao()),
-        CardSelecao("Números Inteiros", "assets/images/ilustracaoNumerosInteiros.png", Atividades()),
-        CardSelecao("Decimais finitos", "assets/images/divisaoFracao.png", Atividades()),
-        CardSelecao("Dízimas periódicas", "assets/images/ilustracaoDizimasPeriodicas.png", Atividades()),
-        CardSelecao("Assunto 5", "assets/images/divisaoFracao.png", Atividades()),
-        CardSelecao("Assunto 6", "assets/images/divisaoFracao.png", Atividades()),
-        CardSelecao("Assunto 7", "assets/images/divisaoFracao.png", Atividades()),
-        CardSelecao("Assunto 8", "assets/images/divisaoFracao.png", Atividades()),
-        CardSelecao("Assunto 9", "assets/images/divisaoFracao.png", Atividades()),
+        CardSelecao("Como montamos uma fração?","assets/images/ilustracaoFracao.png", PageFracao()),
+        CardSelecao("Simplificação de frações", "assets/images/ilustracaoNumerosInteiros.png", PageSimpli()),
+        CardSelecao("Qual fração é a maior?", "assets/images/divisaoFracao.png", Atividades()),
+        CardSelecao("Adição e subtração de frações", "assets/images/ilustracaoDizimasPeriodicas.png", Atividades()),
+        CardSelecao("Multiplicação de frações", "assets/images/divisaoFracao.png", Atividades()),
+        CardSelecao("Divisão de frações", "assets/images/divisaoFracao.png", Atividades()),
+        CardSelecao("Frações para números decimais", "assets/images/divisaoFracao.png", Atividades()),
+        CardSelecao("Porcentagem para fração", "assets/images/divisaoFracao.png", Atividades()),
+        CardSelecao("Número decimal para fração", "assets/images/divisaoFracao.png", Atividades()),
       ], 
     );
   }

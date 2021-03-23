@@ -8,7 +8,8 @@ import 'package:projeto_racionais/widgets/button.dart';
 
 import 'classes/OnClickNavigator.dart';
 
-void main() => runApp(MaterialApp(home: MyApp(), debugShowCheckedModeBanner: false));
+void main() =>
+    runApp(MaterialApp(home: MyApp(), debugShowCheckedModeBanner: false));
 
 class MyApp extends StatefulWidget {
   @override
@@ -17,27 +18,25 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
-
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
+      appBar: AppBar(
           title: Text(
-              "Racionais App",
-              textAlign: TextAlign.center,
+            "Racionais App",
+            textAlign: TextAlign.center,
           ),
           centerTitle: true,
-          backgroundColor: Colors.green,
-        ),
-        body: _bodyMain(context),
-      );
+          backgroundColor: Colors.blue),
+      body: _bodyMain(context),
+    );
   }
 
-   _bodyMain(context) {
-    return Container(
-
-      decoration: new BoxDecoration(
-          //image: new DecorationImage(image: new AssetImage("images/test.png"),fit: BoxFit.cover),
-          color: Colors.white,
+  _bodyMain(context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        image: new DecorationImage(
+            image: new AssetImage("assets/images/logo.png"), fit: BoxFit.cover),
+        //color: Colors.white,
         /*gradient: LinearGradient(
             colors: [
               Color(0xFF20CC32),
@@ -46,68 +45,61 @@ class _MyAppState extends State<MyApp> {
           )*/
       ),
       child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            _buttons(context),
-          ]
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          _buttons(context),
+        ],
       ),
     );
   }
 
-  _buttons(BuildContext context){
-    return Column(
-
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.all(20),
-
-          child: Text(
-            "Bem Vindo!",
-            style: TextStyle(
-              fontSize: 40,
-              fontFamily: 'Arial',
-              fontStyle: FontStyle.normal,
-              color: Colors.green,
-            ),
-          ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              _button(context, "Login" ,  () => OnClickNavigator(context, Login(), replace: true)),
-              _button(context, "Cadastro", () => OnClickNavigator(context, Cadastro())),
-            ],
-        ),
-      ],
-
+  _buttons(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 190.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          _button(context, "Login",
+              () => OnClickNavigator(context, Login(), replace: true)),
+          _button(
+              context, "Cadastro", () => OnClickNavigator(context, Cadastro())),
+        ],
+      ),
     );
   }
 
-  void _onClickNavigator(BuildContext context, Widget page) async{
+  void _onClickNavigator(BuildContext context, Widget page) async {
     String s = await push(context, page);
     print(s);
   }
 
-  _button(BuildContext context,String text, Function onPressed) {
-    Color cor = Colors.green;
-    return Button(text,cor, onPressed: onPressed,);
+  _button(BuildContext context, String text, Function onPressed) {
+    Color cor = Colors.lightBlue;
+    return Button(
+      text,
+      cor,
+      onPressed: onPressed,
+    );
   }
-  bool _selection=false;
-  _popMenu(context){
+
+  bool _selection = false;
+  _popMenu(context) {
     return PopupMenuButton(
-      onSelected: (result) { setState(() {
-        _selection = result;
-      });},
+      onSelected: (result) {
+        setState(() {
+          _selection = result;
+        });
+      },
       itemBuilder: (BuildContext context2) => <PopupMenuEntry>[
-        const PopupMenuItem(
-          child: Text("Working a lot harder")),
+        const PopupMenuItem(child: Text("Working a lot harder")),
       ],
     );
   }
+
+  _img() {
+    return Image.asset(
+      "assets/images/logo.png",
+      height: 600,
+    );
+  }
 }
-
-
-
-
-
-

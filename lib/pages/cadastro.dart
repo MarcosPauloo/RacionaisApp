@@ -15,7 +15,7 @@ class Cadastro extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text("Cadastro"),
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.blue,
         ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),

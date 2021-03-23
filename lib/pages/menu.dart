@@ -2,7 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:projeto_racionais/drawerlist.dart';
 import 'package:projeto_racionais/pages/atividades.dart';
+import 'package:projeto_racionais/pages/pagesAssuntos/pageAdSub.dart';
+import 'package:projeto_racionais/pages/pagesAssuntos/pageDecimalFrac.dart';
+import 'package:projeto_racionais/pages/pagesAssuntos/pageDivi.dart';
+import 'package:projeto_racionais/pages/pagesAssuntos/pageFraRacionais.dart';
 import 'package:projeto_racionais/pages/pagesAssuntos/pageFracao.dart';
+import 'package:projeto_racionais/pages/pagesAssuntos/pageMult.dart';
+import 'package:projeto_racionais/pages/pagesAssuntos/pagePorc.dart';
+import 'package:projeto_racionais/pages/pagesAssuntos/pageQualMaior.dart';
+import 'package:projeto_racionais/pages/pagesAssuntos/pageSimplificacao.dart';
 import 'package:projeto_racionais/pages/selecaoAssuntos.dart';
 import 'package:projeto_racionais/utils/nav.dart';
 import 'package:projeto_racionais/widgets/button.dart';
@@ -25,7 +33,7 @@ class _MenuState extends State<Menu> {
           style: TextStyle(fontSize: 23),
         ),
         centerTitle: true,
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.blue,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.home),
@@ -97,22 +105,23 @@ class _MenuState extends State<Menu> {
       child: _gridSelecao(context),
     );
   }
+
   _gridSelecao(context) {
     return GridView(
       gridDelegate:
           SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
       padding: const EdgeInsets.all(20),
-       children: <Widget>[
-        CardSelecao("Fração","assets/images/ilustracaoFracao.png", PageFracao()),
-        CardSelecao("Números Inteiros", "assets/images/ilustracaoNumerosInteiros.png", Atividades()),
-        CardSelecao("Decimais finitos", "assets/images/divisaoFracao.png", Atividades()),
-        CardSelecao("Dízimas periódicas", "assets/images/ilustracaoDizimasPeriodicas.png", Atividades()),
-        CardSelecao("Assunto 5", "assets/images/divisaoFracao.png", Atividades()),
-        CardSelecao("Assunto 6", "assets/images/divisaoFracao.png", Atividades()),
-        CardSelecao("Assunto 7", "assets/images/divisaoFracao.png", Atividades()),
-        CardSelecao("Assunto 8", "assets/images/divisaoFracao.png", Atividades()),
-        CardSelecao("Assunto 9", "assets/images/divisaoFracao.png", Atividades()),
-      ], 
+      children: <Widget>[
+        CardSelecao("Como montamos uma fração?","assets/images/ilustracaoDizimasPeriodicas.png", PageFracao()),
+        CardSelecao("Simplificação de frações", "assets/images/ilustracaoDizimasPeriodicas.png", PageSimpli()),
+        CardSelecao("Qual fração é a maior?", "assets/images/ilustracaoDizimasPeriodicas.png", PageMaior()),
+        CardSelecao("Adição e subtração de frações", "assets/images/ilustracaoDizimasPeriodicas.png", PageAdSub()),
+        CardSelecao("Multiplicação de frações", "assets/images/ilustracaoDizimasPeriodicas.png", PageMult()),
+        CardSelecao("Divisão de frações", "assets/images/ilustracaoDizimasPeriodicas.png", PageDivi()),
+        CardSelecao("Frações para números decimais", "assets/images/ilustracaoDizimasPeriodicas.png", PageFraDecimais()),
+        CardSelecao("Porcentagem para fração", "assets/images/ilustracaoDizimasPeriodicas.png", PagePorcent()),
+        CardSelecao("Número decimal para fração", "assets/images/ilustracaoDizimasPeriodicas.png", PageDecFra()),
+      ],
     );
   }
 
@@ -127,7 +136,7 @@ class _MenuState extends State<Menu> {
       children: <Widget>[
         Button(
           "Atividades",
-          Colors.green,
+          Colors.blue,
           onPressed: () => _onClickAbrirAtividades(context, Atividades()),
         ),
       ],
@@ -155,14 +164,17 @@ class _MenuState extends State<Menu> {
   }
 
   _text1() {
-    return Center(
-      child: Text(
-        "O que são os numeros racionais?",
-        style: TextStyle(
-          fontSize: 23,
-          fontStyle: FontStyle.normal,
-          fontWeight: FontWeight.bold,
-          decorationColor: Colors.black,
+    return Padding(
+      padding: const EdgeInsets.only(top:8.0),
+      child: Center(
+        child: Text(
+          "O que são os numeros racionais?",
+          style: TextStyle(
+            fontSize: 23,
+            fontStyle: FontStyle.normal,
+            fontWeight: FontWeight.bold,
+            decorationColor: Colors.black,
+          ),
         ),
       ),
     );

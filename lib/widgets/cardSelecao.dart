@@ -15,6 +15,7 @@ class CardSelecao extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      //color: Colors.green,
       child: InkWell(
         splashColor: Colors.blue.withAlpha(30),
         onTap: () {
@@ -24,54 +25,42 @@ class CardSelecao extends StatelessWidget {
         },
         child: Container(
           child: Container(
-              child: Stack(
-            children: <Widget>[
-              _img(enderecoImagem),
-              Text(text),
-            ],
-          )),
+            child: Stack(
+              children: <Widget>[
+                _img(enderecoImagem),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: new BorderRadius.circular(10.0),
+                    color: Colors.blue.withOpacity(0.5),
+                    
+                  ),
+                  child: new Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: Text(
+                      text,
+                      style: TextStyle(
+                        color: Colors.black87,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
           width: 100,
           height: 100,
         ),
       ),
     );
   }
-   _img(endereco) {
+
+  _img(endereco) {
     return Image.asset(
       endereco,
       width: 500,
       height: 100,
     );
-    
   }
-  /*_stackBase() {
-    return Stack(
-      children: <Widget>[
-        _img(),
-        Positioned(
-          bottom: 15.0,
-          left: 20.0,
-          child: Text(
-            "aaaaaa.com",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-              color: Colors.black,
-            ),
-          ),
-        ),
-        Positioned(
-          bottom: 10.0,
-          left: 280.0,
-          child: Button(
-            "23",
-            Colors.green,
-            onPressed: () {
-              print("ok");
-            },
-          ),
-        ),
-      ],
-    );
-  }*/
 }

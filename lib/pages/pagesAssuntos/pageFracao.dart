@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:projeto_racionais/classes/OnClickNavigator.dart';
 import 'package:projeto_racionais/pages/atividades.dart';
+import 'package:projeto_racionais/pages/pagesAssuntos/WidgetsExpl/textExp.dart';
+import 'package:projeto_racionais/pages/pagesAssuntos/WidgetsExpl/textoTopico.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PageFracao extends StatelessWidget {
   @override
@@ -9,33 +12,22 @@ class PageFracao extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Frações"),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.blue,
       ),
       body: _bodyFracoes(context),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.edit),
-          onPressed: () => OnClickNavigator(context, Atividades()),
-          backgroundColor: Colors.green
-      ),
+          child: Icon(Icons.edit),
+          onPressed: () => _launchURL(),
+          backgroundColor: Colors.blue),
     );
   }
 
   _bodyFracoes(context) {
     return ListView(children: <Widget>[
-      Container(child: _text1()),
-      Container(
-          child: Padding(
-        padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
-        child: _text2(),
-      )),
+      TextTopic("Como montamos uma fração?",first:true),
+      TextExp("É bem simples, ela é formada por dois números: o de baixo é o denominador (que é a quantidade que divide a parte inteira) e o de cima é o numerador (que é a parte que selecionamos)"),
       Container(child: _img()),
-      Container(child: _text1List()),
-      Container(
-          child: Padding(
-        padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
-        child: _text2List(),
-      )),
-      Container(child: _img2()),
+      
     ]);
   }
 
@@ -56,13 +48,15 @@ class PageFracao extends StatelessWidget {
   }
 
   _text1() {
-    return Text(
-      "Como montamos uma fração?",
-      style: TextStyle(
-        fontSize: 23,
-        fontStyle: FontStyle.normal,
-        fontWeight: FontWeight.bold,
-        decorationColor: Colors.black,
+    return Center(
+      child: Text(
+        "Como montamos uma fração?",
+        style: TextStyle(
+          fontSize: 23,
+          fontStyle: FontStyle.normal,
+          fontWeight: FontWeight.bold,
+          decorationColor: Colors.black,
+        ),
       ),
     );
   }
@@ -97,5 +91,14 @@ class PageFracao extends StatelessWidget {
         wordSpacing: 2,
       ),
     );
+  }
+
+  _launchURL() async {
+    const url = 'https://www.geogebra.org/m/wwafxdzv';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

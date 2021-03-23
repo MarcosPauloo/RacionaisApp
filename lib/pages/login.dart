@@ -25,7 +25,7 @@ class Login extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text("Login"),
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.blue,
         ),
         body: _bodyLogin(context));
   }
@@ -76,7 +76,7 @@ class Login extends StatelessWidget {
         height: 40,
         child: Button(
           "Login",
-          Colors.green,
+          Colors.blue,
           onPressed: () => _onClickNavigator(context, Menu()),
         ));
   }
